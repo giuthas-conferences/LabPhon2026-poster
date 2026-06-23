@@ -2,7 +2,7 @@
 \mode<presentation>{\usetheme{I6pd2}}
 \usepackage[english]{babel}
 \usepackage{amsmath,amsthm, amssymb, latexsym}
-\usepackage[orientation=portrait,size=a0,debug]{beamerposter}
+\usepackage[orientation=lanscape,size=a1,debug,scale=1.2]{beamerposter}
 \usepackage{xcolor,colortbl}
 \usepackage{tipa}
 \usepackage{natbib}
@@ -47,11 +47,11 @@
 
 \graphicspath{{figures/}}
  
-\title{\huge Title}
-\author{Pertti Palo$^{\mathrm{a}}$ and Steven Lulich$^{\mathrm{b}}$}
-\newcommand{\emails}{$^{\mathrm{a}}$pertti.palo@taurlin.org, $^{\mathrm{b}}$slulich@indiana.edu}
-\institute{Department of Speech, Language and Hearing Sciences, Indiana University, Bloomington, IN}
-\date{6th October 2021}
+\title{\huge Automating Acoustic and Articulatory Segmentation Exercises}
+\author{Pertti Palo$^{\mathrm{a}}$}
+\newcommand{\emails}{$^{\mathrm{a}}$pertti.palo@taurlin.org}
+\institute{University of Alberta, Edmonton, Alberta, Canada}
+\date{27th June 2026}
 
 \newlength{\columnheight}
 \setlength{\columnheight}{105cm}
@@ -64,71 +64,67 @@
 \begin{frame}{} 
   \vspace{-1cm}
   \begin{columns}[t]
-    \begin{column}{.45\linewidth}
+    \begin{column}{.4\linewidth}
       
-      \begin{block}{Introduction: What do we know about acoustic
-          reaction times?}
-
-        \begin{columns}
-          \hspace*{-.25cm}
-          \begin{column}{.3\textwidth}
+      \begin{block}{Background: Phonetic Segmentation}
             \begin{itemize}
-            \item \cite{RastleEtAl-CharacterizingMotorExecution-2005} measured
-            delayed naming reaction times.
-            \item They report Acoustic RTs and onset durations (OD) for all
-              phonotactically legal English consonant onsets.
-            \item The inverse correlation pattern was first discovered by
-              \cite{Fowler-PerceptualCentersSpeech-1979}.
+            \item Segmenting audio data has been part of our phonetic analysis toolset ever since the invention of audio recordings. 
+            \item Since then we have gained two large improvements: 
+            \begin{itemize}
+              \item spectrograms \citep{Gabor-TheoryCommunicationPart-1946,KoenigEtAl-SoundSpectrograph-1946,Fant-SoundSpectrography-1961} and
+              \item computer aided segmentation with programs such as Praat
+                \citep{BoersmaWeenink-PraatDoingPhonetics-2010}. 
             \end{itemize}
-          \end{column}
-          \begin{column}{.6\textwidth}
-            \kommentti{Rastle figure here.}
-            % \vspace*{.5cm}
-            % \input{figures/Rastle_ICPhS.tex}
-          \end{column}
-        \end{columns}
-      \end{block}
-
-      \begin{block}{Materials: The Experiment} 
-
-        'Simple' task of finding acoustic and movement onsets in
-        simultaneously recorded sound data and articulatory data from
-        Ultrasound Tongue Imaging (UTI).
-
-        /CVC/ and /VC/ English lexical words produced by one
-        male speaker: {\em at, eat, ought, back, beat, bought, dat, deep,
-          dot, fat, feet, fought, gap, geek, got, hat, heat, hot, cat,
-          keep, caught, lack, leap, lot, map, meet, mock, nat, neat, not,
-          pack, Pete, pop, rat, reap, rock, sat, seat, sought, shack,
-          sheet, shop, tap, teak, talk, whack, wheat,} and {\em what}.
+            \item Segmentation has also become more complex with the
+              introduction of ever improving articulatory recording methods and
+              other multimodal data, and the need to analyse them in conjunction
+              with traditional audio recordings. 
+            \item Now we are on the cusp of yet another great shift in how we
+              work with the rapid improvement of forced alignment systems which
+              started already before the current revolution in deep learning
+              \citep[see e.g.][]{RosenfelderEtAl-FAVEForcedAlignment-2022} and is
+              now becoming part of that revolution
+              \citep{McAuliffeEtAl-MontrealForcedAligner-2017,KelleyEtAl-MasonAlbertaPhoneticSegmenter-2024}.
+            \end{itemize}
       \end{block}
       
-      \begin{block}{Methods: Recording and annotation}\footnotesize
+      \begin{block}{Purpose: Teach Segmentation with Minimal Effort}
         \begin{itemize}
-        \item \kommentti{Say something about methods.}
+        \item On the surface it might seem that the days of us needing to do
+          manual segmentation are coming to an end, but even if this does
+          eventually happen, at the moment we still need expert human
+          segmenters for two crucial tasks.
+        \item First, the deep learning frameworks need data to learn from and
+          this data needs to be well matched with what ever dataset we wish to
+          eventually analyse.
+        \item Second, even if it should happen that we get a magical large
+          segmentation model that can deal with any human language and any
+          dialect and accent there of -- even ones that do not exist yet -- we
+          will still need to verify the output of any such model.
+        \item Learning to segment data helps students develop an understanding
+          of the concepts of phoneme and phone.
+        \item Yet, surprisingly, we do not have easy methods for teaching
+          segmentation to new learners -- neither for generating exercises nor
+          for running them.
         \end{itemize}
       \end{block}
 
-      \begin{block}{Results: Acoustic RTs}
+      \begin{block}{Method: Automated Exercises}
         \begin{itemize}
-        \item Acoustic RT (AcRT) behaves as expected
-          \citep{RastleEtAl-CharacterizingMotorExecution-2005,
-          MooshammerEtAl-BridgingPlanningExecution-2012}.
-        \item Statistical analysis yields an expected result
-          \citep{Fowler-PerceptualCentersSpeech-1979,
-          RastleEtAl-CharacterizingMotorExecution-2005}:
-          AcRT $\sim -\frac{1}{2}$ OD.
-        \end{itemize}
-      \end{block}
-
-    \end{column}
-    \begin{column}{.45\linewidth}
-          
-      \begin{block}{Results: Articulatory to Acoustic Interval (AAI)}
-        \begin{itemize}
-        \item Again statistical analysis yields: AAI $\sim
-          -\frac{1}{2}$ OD.
-        \item However, a better predictor for AAI than OD is phoneme.
+        \item A potential solution for this problem is generating segmentation
+          exercises from existing data.
+        \item The idea is really very simple: Take any Praat TextGrids and the
+          corresponding data -- whether audio only or multimodal -- and
+          scramble the boundary placement within the TextGrid.
+        \item Then let the learner correct the boundaries and compare to the
+          original as they go along.
+        \item This all has been implemented in PATKIT (Phonetic Analysis
+          ToolKIT, \citep{PaloEtAl-PATKITPhoneticAnalysis-2026}) which is a
+          analysis and annotation program for phonetic data written in the
+          Python programming language.
+        % \item Future versions are planned to include feedback on progress and
+        %   accuracy, and the possibility to annotate boundaries and recordings
+        %   with written notes.
         \end{itemize}
         % \vspace*{.5cm}
         % \begin{center}
@@ -139,17 +135,13 @@
       \begin{block}{Discussion: Future work}
 
         \begin{itemize}
-        \item There is no data like more data.
+        \item This is where I need your help.
+        \item I would like to know what you need.
+        \item If you wish to contribute ideas, feature requests, bug reports,
+        documentation, more exercises, code, or something else it would all be
+        welcome.
         \end{itemize}
       \end{block}
-
-    \end{column}
-  \end{columns}
-      
-  \vspace*{1cm}
-  
-  \begin{columns}
-    \begin{column}{.945\linewidth}
 
       \begin{block}{References}
 
@@ -160,20 +152,32 @@
 
       \end{block}
 
-      \vspace*{1cm}
+      % \begin{block}{Acknowledgements}
+      %   %\footnotesize
+      %   \begin{minipage}{0.5\textwidth}
+      %     % \includegraphics[scale=1]{figures/rbo.jpg}
+      %     We wish to thank Steve Cowen for assistance with the
+      %     ultrasound recordings and Professor Alan Wrench for advice
+      %     and help with using AAA.
+      %   \end{minipage}
+      %   % \begin{minipage}{0.5\textwidth}
+      %   %   \hspace{10cm}\includegraphics[height=3.5cm]{figures/CASL_Sub_logo.jpg} 
+      %   % \end{minipage}
+      % \end{block}
+    \end{column}
 
-      \begin{block}{Acknowledgements}
-        %\footnotesize
-        \begin{minipage}{0.5\textwidth}
-          % \includegraphics[scale=1]{figures/rbo.jpg}
-          We wish to thank Steve Cowen for assistance with the
-          ultrasound recordings and Professor Alan Wrench for advice
-          and help with using AAA.
-        \end{minipage}
-        % \begin{minipage}{0.5\textwidth}
-        %   \hspace{10cm}\includegraphics[height=3.5cm]{figures/CASL_Sub_logo.jpg} 
-        % \end{minipage}
+    \begin{column}{.58\linewidth}
+          
+      \begin{block}{User interface: Example Answer}
+          \centering
+          \includegraphics[width=\columnwidth]{patkit-example-3.png}
       \end{block}
+
+      \begin{block}{User interface: Scrambled TextGrid}
+          \centering
+          \includegraphics[width=\columnwidth]{patkit-answer-3.png}
+      \end{block}
+
     \end{column}
   \end{columns}
 
