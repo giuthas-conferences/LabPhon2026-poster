@@ -68,17 +68,18 @@
       
       \begin{block}{Background: Phonetic Segmentation}
             \begin{itemize}
-            \item Segmenting audio data has been part of our phonetic analysis toolset ever since the invention of audio recordings. 
+            \item Segmenting audio data has been part of our phonetic analysis
+            toolset since the invention of audio recordings. 
             \item Since then we have gained two large improvements: 
             \begin{itemize}
               \item spectrograms \citep{Gabor-TheoryCommunicationPart-1946,KoenigEtAl-SoundSpectrograph-1946,Fant-SoundSpectrography-1961} and
               \item computer aided segmentation with programs such as Praat
                 \citep{BoersmaWeenink-PraatDoingPhonetics-2010}. 
             \end{itemize}
-            \item Segmentation has also become more complex with the
-              introduction of ever improving articulatory recording methods and
-              other multimodal data, and the need to analyse them in conjunction
-              with traditional audio recordings. 
+            \item Segmentation has become more complex with the introduction of
+              articulatory recording methods and other multimodal data, and the
+              need to analyse them in conjunction with traditional audio
+              recordings. 
             \item Now we are on the cusp of yet another great shift in how we
               work with the rapid improvement of forced alignment systems which
               started already before the current revolution in deep learning
@@ -91,16 +92,19 @@
       \begin{block}{Purpose: Teach Segmentation with Minimal Effort}
         \begin{itemize}
         \item On the surface it might seem that the days of us needing to do
-          manual segmentation are coming to an end, but even if this does
-          eventually happen, at the moment we still need expert human
-          segmenters for two crucial tasks.
-        \item First, the deep learning frameworks need data to learn from and
-          this data needs to be well matched with what ever dataset we wish to
-          eventually analyse.
-        \item Second, even if it should happen that we get a magical large
-          segmentation model that can deal with any human language and any
-          dialect and accent there of -- even ones that do not exist yet -- we
-          will still need to verify the output of any such model.
+          manual segmentation are coming to an end, but we still need expert human
+          segmenters for two crucial tasks:
+        \begin{enumerate}
+          \item The deep learning frameworks need data to learn from and
+            this data needs to be well matched with what ever dataset we wish to
+            eventually analyse.
+          \item Even if it should happen that we get a magical large
+            segmentation model that can deal with any human language and any
+            dialect and accent there of -- even ones that do not exist yet -- we
+            will still need to verify the output of any such model.
+        \end{enumerate}
+        \item In addition we are getting more and more time domain articulatory
+        data. 
         \item Learning to segment data helps students develop an understanding
           of the concepts of phoneme and phone.
         \item Yet, surprisingly, we do not have easy methods for teaching
@@ -112,16 +116,20 @@
       \begin{block}{Method: Automated Exercises}
         \begin{itemize}
         \item A potential solution for this problem is generating segmentation
-          exercises from existing data.
-        \item The idea is really very simple: Take any Praat TextGrids and the
-          corresponding data -- whether audio only or multimodal -- and
-          scramble the boundary placement within the TextGrid.
-        \item Then let the learner correct the boundaries and compare to the
-          original as they go along.
-        \item This all has been implemented in PATKIT (Phonetic Analysis
-          ToolKIT, \citep{PaloEtAl-PATKITPhoneticAnalysis-2026}) which is a
-          analysis and annotation program for phonetic data written in the
-          Python programming language.
+          exercises from existing data:
+        \begin{itemize}
+          \item Take any Praat TextGrids and the
+            corresponding data -- whether audio only or multimodal -- and
+            scramble the boundary placement within the TextGrid.
+          \item Then let the learner correct the boundaries and compare to the
+            original as they go along.
+        \end{itemize} 
+        \item This all has been implemented in PATKIT -- Phonetic Analysis
+          ToolKIT \citep{PaloEtAl-PATKITPhoneticAnalysis-2026}.
+        \item PATKIT has been written in the Python programming language.
+        \item It can also process articulatory data.
+        \item Get PATKIT on PyPi: \url{https://pypi.org/project/patkit/} or \\
+        fork it on GitHub: \url{https://github.com/giuthas/patkit}.
         % \item Future versions are planned to include feedback on progress and
         %   accuracy, and the possibility to annotate boundaries and recordings
         %   with written notes.
@@ -135,7 +143,7 @@
       \begin{block}{Discussion: Future work}
 
         \begin{itemize}
-        \item This is where I need your help.
+        % \item This is where I need your help.
         \item I would like to know what you need.
         \item If you wish to contribute ideas, feature requests, bug reports,
         documentation, more exercises, code, or something else it would all be
